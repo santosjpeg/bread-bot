@@ -20,8 +20,8 @@ def main():
 
     @bot.command()
     async def admin(ctx, arg):
-        if ctx.author == INSERT_ADMIN and arg == 'disconnect':
-           await bot.close()
+        if ctx.author == INSERT_ADMIN or arg == 'disconnect':
+            await bot.close()
 
     
     bot.run(INSERT_TOKEN)
