@@ -28,6 +28,8 @@ def main():
     logger.addHandler(handler)
 
     bot = commands.Bot(command_prefix='.')
+    bot.remove_command('help')
+
     BREADTIME = datetime.time(15,33) 
 
     @bot.event
@@ -45,6 +47,11 @@ def main():
                 await ctx.send('breadtime is {}:{} PM every day!'.format(BREADTIME.hour - 12, BREADTIME.minute))
             else:
                 await ctx.send('breadtime is {}:{} AM every day!'.format(BREADTIME.hour, BREADTIME.minute))
+
+    @bot.command()
+    async def help(ctx, arg):
+        if arg == '':
+            await ctx.send('help page in progress...')
     
     bot.run(INSERT_TOKEN)
 
