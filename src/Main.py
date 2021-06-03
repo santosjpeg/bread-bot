@@ -11,7 +11,7 @@ import discord
 from discord.ext import commands, tasks
 
 #REPLACE vars.py FILE WITH DECLARED VARS IN main()
-from vars import INSERT_TOKEN, INSERT_ADMIN
+from vars import TOKEN, ADMIN, EMBED_DEF
 
 #misc libraries
 import logging 
@@ -35,10 +35,12 @@ def main():
     @bot.event
     async def on_connect():
        print('bot connected!')
+       logger.info('BOT CONNECTED TO SERVER')
 
     @bot.event
     async def on_disconnect():
         print('bot disconnected!')
+        logger.info('BOT DISCONNECTED FROM SERVER')
 
     @bot.command()
     async def when(ctx, arg):
@@ -49,11 +51,19 @@ def main():
                 await ctx.send('breadtime is {}:{} AM every day!'.format(BREADTIME.hour, BREADTIME.minute))
 
     @bot.command()
-    async def help(ctx, arg):
-        if arg == '':
-            await ctx.send('help page in progress...')
+    async def test(ctx):
+        await ctx.send('this is the test function I hate it')
+
+    @bot.command()
+    async def bread(ctx):
+        await ctx.send('why do we live in this world just to suffer. here :bread:')
+
+    @bot.command()
+    async def help(ctx, arg=''):
+        if arg =='':
+            await ctx.send(embed=EMBED_DEF)
     
-    bot.run(INSERT_TOKEN)
+    bot.run(TOKEN)
 
 if __name__ == '__main__':
     main()
